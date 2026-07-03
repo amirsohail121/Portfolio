@@ -2,7 +2,7 @@ import './App.css'
 
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-// import About from './components/About'
+import About from './components/About'
 // import Skills from './components/Skills'
 // import TechStack from './components/TechStack'
 // import Timeline from './components/Timeline'
@@ -18,7 +18,7 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        {/* <About /> */}
+        <About />
         {/* <Skills /> */}
         {/* <TechStack /> */}
         {/* <Timeline /> */}

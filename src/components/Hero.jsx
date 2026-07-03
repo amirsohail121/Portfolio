@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import heroImg from '../assets/hero.png'
+import heroImg from '../assets/heroImg.jpg'
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa'
 
 function Hero() {
 
   const codeText = `const developer = {
-  name: 'Amir',
+  name: 'Amir Sohail',
   stack: 'MERN',
   focus: 'Frontend',
   status: 'building',
@@ -41,7 +41,7 @@ function Hero() {
           </div>
 
           <p className="font-mono text-[var(--accent)] text-sm mb-3">hi, i'm</p>
-          <h1 className="text-5xl font-semibold text-[var(--text-heading)] mb-4">Amir</h1>
+          <h1 className="text-5xl font-semibold text-[var(--text-heading)] mb-4">Amir Sohail</h1>
           <p className="text-[var(--text-muted)] text-lg mb-8 max-w-md">
             Full stack developer building with the MERN stack. B.Tech CSE
             student turning practical problems into working software.
