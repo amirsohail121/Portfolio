@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import { FaGraduationCap, FaCode, FaUsers, FaMapMarkerAlt } from 'react-icons/fa'
 
 const infoCards = [
-  { icon: FaGraduationCap, label: 'Education', value: 'B.Tech CSE, 6th Sem' },
-  { icon: FaMapMarkerAlt, label: 'University', value: 'CSVTU, Raipur' },
+  { icon: FaGraduationCap, label: 'Education', value: 'B.Tech CSE, 7th Sem' },
+  { icon: FaMapMarkerAlt, label: 'University', value: 'CSVTU, Bhilai, Chhattisgarh' },
   { icon: FaCode, label: 'Focus', value: 'MERN Stack' },
   { icon: FaUsers, label: 'Status', value: 'Open to Work' },
 ]
@@ -129,9 +129,10 @@ function About() {
                 <div className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                   <span style={{ color: 'var(--accent)' }}>{'>'}</span> My focus is the MERN stack — designing MongoDB schemas, writing Express APIs, and building React frontends. I like working hands-on and shipping things that actually work.
                 </div>
-                <div className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+               {/* <div className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                   <span style={{ color: 'var(--accent)' }}>{'>'}</span> I collaborate with classmates on academic projects — from browser automation tools to blockchain systems and real-time chat apps.
                 </div>
+                * */}
               </div>
             </div>
           </div>
