@@ -1,34 +1,40 @@
 import './App.css'
-
 import Navbar from './components/Navbar'
+import BottomNav from './components/BottomNav'
 import Hero from './components/Hero'
 import About from './components/About'
-import Skills from './components/Skills'
-// import TechStack from './components/TechStack'
+// import Education from './components/Education'
 // import Timeline from './components/Timeline'
+// import Skills from './components/Skills'
 // import Projects from './components/Projects'
-// import Certificates from './components/Certificates'
 // import GithubStats from './components/GithubStats'
 // import Contact from './components/Contact'
 // import Footer from './components/Footer'
 
 function App() {
   return (
-    <>
+    <div className="flex min-h-screen " style={{ background: 'var(--bg-primary)' }}>
+
+      {/* Left Sidebar — hidden on mobile */}
       <Navbar />
-      <main>
+
+      {/* Main Content */}
+      <main className="flex-1  ml-0 sm:ml-20">
         <Hero />
         <About />
-        <Skills />
-        {/* <TechStack /> */}
+        {/* <Education /> */}
         {/* <Timeline /> */}
+        {/* <Skills /> */}
         {/* <Projects /> */}
-        {/* <Certificates /> */}
         {/* <GithubStats /> */}
         {/* <Contact /> */}
-      </main> 
-      {/* <Footer /> */}
-    </>
+        {/* <Footer /> */}
+      </main>
+
+      {/* Bottom Nav — mobile only */}
+      <BottomNav />
+
+    </div>
   )
 }
 

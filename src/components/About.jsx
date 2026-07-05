@@ -1,181 +1,161 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { FaGraduationCap, FaCode, FaUsers, FaMapMarkerAlt } from 'react-icons/fa'
-
-const infoCards = [
-  { icon: FaGraduationCap, label: 'Education', value: 'B.Tech CSE, 7th Sem' },
-  { icon: FaMapMarkerAlt, label: 'University', value: 'CSVTU, Bhilai, Chhattisgarh' },
-  { icon: FaCode, label: 'Focus', value: 'MERN Stack' },
-  { icon: FaUsers, label: 'Status', value: 'Open to Work' },
-]
-
-function useCountUp(target, duration = 2000, start = false) {
-  const [count, setCount] = useState(0)
-
-  useEffect(() => {
-    if (!start || target === 0) return
-    let startTime = null
-    const step = (timestamp) => {
-      if (!startTime) startTime = timestamp
-      const progress = Math.min((timestamp - startTime) / duration, 1)
-      setCount(Math.floor(progress * target))
-      if (progress < 1) requestAnimationFrame(step)
-    }
-    requestAnimationFrame(step)
-  }, [start, target])
-
-  return count
-}
-
-function StatCard({ number, label, suffix, start }) {
-  const count = useCountUp(number, 2000, start)
-  return (
-    <div
-      className="rounded-lg p-5 text-center border"
-      style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
-    >
-      <p
-        className="text-3xl font-bold font-mono mb-1"
-        style={{ color: 'var(--accent)' }}
-      >
-        {count}{suffix}
-      </p>
-      <p
-        className="text-xs font-mono"
-        style={{ color: 'var(--text-muted)' }}
-      >
-        {label}
-      </p>
-    </div>
-  )
-}
+import React from "react";
 
 function About() {
-  const [githubStats, setGithubStats] = useState({ repos: 0 })
-  const [startCount, setStartCount] = useState(false)
-  const statsRef = useRef(null)
-
-  const stats = [
-    { number: githubStats.repos, label: 'GitHub Repos', suffix: '+' },
-    { number: 3, label: 'Projects Built', suffix: '+' },
-    { number: 15, label: 'Months Coding', suffix: '+' },
-  ]
-
-  useEffect(() => {
-    fetch('https://api.github.com/users/amirsohail121')
-      .then(res => res.json())
-      .then(data => setGithubStats({ repos: data.public_repos }))
-  }, [])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setStartCount(true) },
-      { threshold: 0.3 }
-    )
-    if (statsRef.current) observer.observe(statsRef.current)
-    return () => observer.disconnect()
-  }, [])
+  const focus = [
+    "MERN Stack",
+    "AI Integration",
+    "Socket.io",
+    "Cloud",
+  ];
 
   return (
-    <section id="about" className="min-h-screen pt-24 pb-16 px-6">
-      <div className="max-w-5xl mx-auto">
+    <section id="about" className="py-20 px-6 sm:px-10 lg:px-16">
+      <div className="max-w-6xl mx-auto">
 
-        {/* Section Heading */}
-        <div className="flex items-center gap-3 mb-12">
-          <span className="font-mono text-sm opacity-60" style={{ color: 'var(--accent)' }}>01</span>
-          <h2 className="text-2xl font-semibold" style={{ color: 'var(--text-heading)' }}>about</h2>
-          <span className="flex-1 h-px" style={{ background: 'var(--border)' }} />
+        {/* Heading */}
+        <div className="mb-10">
+          <p className="text-yellow-500 uppercase tracking-[0.3em] text-xs font-mono">
+            Get To Know Me
+          </p>
+          <h2
+            className="text-4xl sm:text-5xl font-extrabold mt-2"
+            style={{ color: "var(--text-heading)" }}
+          >
+            About <span className="text-yellow-500">Me</span>
+          </h2>
+          <div className="w-20 h-1 bg-yellow-500 rounded-full mt-3" />
         </div>
 
-        {/* Stats Row */}
-        <div ref={statsRef} className="grid grid-cols-3 gap-4 mb-12">
-          {stats.map((stat) => (
-            <StatCard
-              key={stat.label}
-              number={stat.number}
-              label={stat.label}
-              suffix={stat.suffix}
-              start={startCount}
-            />
-          ))}
-        </div>
-
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-
-          {/* Bio */}
-          <div className="sm:col-span-2 space-y-4">
-            <div
-              className="rounded-lg border overflow-hidden"
-              style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+        {/* About Card */}
+        <div
+          className="rounded-3xl border overflow-hidden transition-all duration-300 hover:border-yellow-500 hover:shadow-xl hover:shadow-yellow-500/10"
+          style={{ background: "var(--bg-card)", borderColor: "var(--border)" }}
+        >
+          {/* Terminal Bar - full width */}
+          <div
+            className="flex items-center gap-1.5 px-6 py-3 border-b"
+            style={{  borderColor: "var(--border)" }}
+          >
+            <span className="w-3 h-3 rounded-full bg-red-400/80" />
+            <span className="w-3 h-3 rounded-full bg-yellow-400/80" />
+            <span className="w-3 h-3 rounded-full bg-green-400/80" />
+            <span
+              className="ml-3 font-mono text-xs"
+              style={{ color: "var(--text-muted)" }}
             >
-              {/* Terminal bar */}
-              <div
-                className="flex items-center gap-1.5 px-4 py-2.5 border-b"
-                style={{ borderColor: 'var(--border)' }}
-              >
-                <span className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
-                <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
-                <span className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
-                <span className="ml-2 font-mono text-xs" style={{ color: 'var(--text-muted)' }}>
-                  bio.txt
-                </span>
-              </div>
-
-              {/* Bio content */}
-              <div className="p-5 space-y-3">
-                <div className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                  <span style={{ color: 'var(--accent)' }}>{'>'}</span> I'm a 7th semester B.Tech CSE student at S.S.I.P.M.T., Raipur, affiliated with CSVTU. Alongside coursework, I build practical software that solves real problems.
-                </div>
-                <div className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                  <span style={{ color: 'var(--accent)' }}>{'>'}</span> My focus is the MERN stack — designing MongoDB schemas, writing Express APIs, and building React frontends. I like working hands-on and shipping things that actually work.
-                </div>
-               {/* <div className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-                  <span style={{ color: 'var(--accent)' }}>{'>'}</span> I collaborate with classmates on academic projects — from browser automation tools to blockchain systems and real-time chat apps.
-                </div>
-                * */}
-              </div>
-            </div>
+              about_me.js
+            </span>
           </div>
 
-          {/* Info Cards */}
-          <div className="space-y-3">
-            {infoCards.map((card) => {
-              const Icon = card.icon
-              return (
-                <div
-                  key={card.label}
-                  className="rounded-lg border px-4 py-3 flex items-center gap-4 hover:border-[var(--accent)] transition-all duration-300"
-                  style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+          {/* Card Content */}
+          <div className="p-8 md:p-10">
+            <div className="grid lg:grid-cols-[2fr_1fr] gap-10 items-center">
+
+              {/* Left */}
+              <div>
+                <h3
+                  className="text-3xl font-bold mb-5"
+                  style={{ color: "var(--text-heading)" }}
                 >
-                  <Icon size={18} style={{ color: 'var(--accent)' }} className="shrink-0" />
-                  <div>
-                    <p className="font-mono text-xs mb-0.5" style={{ color: 'var(--text-muted)' }}>
-                      {card.label}
-                    </p>
-                    <p className="text-sm font-medium" style={{ color: 'var(--text-heading)' }}>
-                      {card.value}
-                    </p>
+                  Hi, I'm Amir Sohail 👋
+                </h3>
+
+                <p
+                  className="leading-8 text-base"
+                  style={{ color: "var(--text-muted)" }}
+                >
+                  I'm a{" "}
+                  <span className="font-semibold" style={{ color: "var(--text-heading)" }}>
+                    third-year Computer Science student
+                  </span>{" "}
+                  and a{" "}
+                  <span className="font-semibold" style={{ color: "var(--text-heading)" }}>
+                    Full Stack MERN Developer
+                  </span>
+                  . I enjoy building modern web applications that solve real-world
+                  problems through clean architecture, responsive interfaces, and
+                  scalable backend systems.
+                </p>
+
+                <p
+                  className="leading-8 mt-5"
+                  style={{ color: "var(--text-muted)" }}
+                >
+                  I'm currently exploring AI integration, real-time applications,
+                  and cloud technologies while continuously improving my
+                  full-stack development skills. My goal is to become a{" "}
+                  <span className="font-semibold" style={{ color: "var(--text-heading)" }}>
+                    Full Stack AI Developer
+                  </span>{" "}
+                  building intelligent, production-ready software.
+                </p>
+              </div>
+
+              {/* Right */}
+              <div className="space-y-5">
+
+                {/* Focus */}
+                <div
+                  className="rounded-2xl border p-5"
+                  style={{ background: "rgba(255,255,255,0.02)", borderColor: "var(--border)" }}
+                >
+                  <h4 className="font-semibold mb-4" style={{ color: "var(--text-heading)" }}>
+                    🎯 Current Focus
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {focus.map((item) => (
+                      <span
+                        key={item}
+                        className="px-3 py-2 rounded-full border border-yellow-500 text-yellow-500 text-xs hover:bg-yellow-500 hover:text-black transition"
+                      >
+                        {item}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              )
-            })}
 
-            {/* Resume Button */}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="w-full mt-2 py-2.5 rounded-lg border font-mono text-sm flex items-center justify-center gap-2 transition-all duration-300 hover:shadow-[0_0_15px_var(--glow)]"
-              style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}
-            >
-              Download Resume ↓
-            </a>
+                {/* What Drives Me */}
+                <div
+                  className="rounded-2xl border p-5"
+                  style={{ background: "rgba(255,255,255,0.02)", borderColor: "var(--border)" }}
+                >
+                  <h4 className="font-semibold mb-4" style={{ color: "var(--text-heading)" }}>
+                    💡 What Drives Me
+                  </h4>
+                  <ul className="space-y-3 text-sm" style={{ color: "var(--text-muted)" }}>
+                    <li className="flex items-center gap-2">
+                      <span className="text-yellow-500">✓</span> Building real-world applications
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="text-yellow-500">✓</span> Learning modern technologies
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="text-yellow-500">✓</span> Writing clean & maintainable code
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="text-yellow-500">✓</span> Solving meaningful problems
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Resume Button */}
+                <a
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-sm bg-yellow-500 text-black transition-all duration-300 hover:bg-yellow-400"
+                >
+                  Download Resume ↓
+                </a>
+
+              </div>
+
+            </div>
           </div>
-
         </div>
       </div>
     </section >
-  )
+  );
 }
 
-export default About
+export default About;
