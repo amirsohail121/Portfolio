@@ -5,9 +5,9 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from 'react-icons/fa'
 function Hero() {
 
   const codeText = `const developer = {
-  name: 'Amir Sohail',
-  stack: 'MERN',
-  status: 'building',
+  role: "Full Stack Developer",
+  stack: ["React","Node.js","Express","MongoDB"],
+  available: true
 };`
 
   const [displayedText, setDisplayedText] = useState('')
@@ -30,10 +30,9 @@ function Hero() {
         className="flex flex-col justify-center px-6 sm:px-12 py-6 sm:py-0 w-full sm:w-1/2 order-2 sm:order-1 min-h-[50vh] sm:min-h-screen"
         style={{ background: 'var(--bg-primary)' }}
       >
-
         {/* Greeting */}
-        <p className="font-mono text-xs mb-2 tracking-widest uppercase text-yellow-500">
-          hi, i'm
+        <p className="font-mono text-xs mb-3 tracking-widest uppercase text-yellow-500">
+          Full Stack MERN Developer
         </p>
 
         {/* Name */}
@@ -41,9 +40,8 @@ function Hero() {
           className="text-3xl sm:text-5xl font-extrabold mb-3 leading-tight"
           style={{ color: 'var(--text-heading)' }}
         >
-          Amir <span className="text-yellow-500">Sohail</span>
+          Hi, I'm <span className="text-yellow-500">Amir Sohail</span>
         </h1>
-
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-3">
           {['Full Stack Dev', 'MERN Stack', 'Open to Work'].map((tag) => (
@@ -58,12 +56,10 @@ function Hero() {
 
         {/* Tagline */}
         <p
-          className="text-sm mb-5 max-w-sm leading-relaxed"
+          className="text-sm mb-5  leading-relaxed"
           style={{ color: 'var(--text-muted)' }}
         >
-          B.Tech CSE student turning practical problems into
-          working software. Building with the MERN stack,
-          one commit at a time.
+          Final-year Computer Science student and Full Stack MERN Developer passionate about building scalable, responsive, and user-friendly web applications using React, Node.js, Express, and MongoDB.
         </p>
 
         {/* Buttons */}
@@ -72,7 +68,7 @@ function Hero() {
             href="#projects"
             className="px-5 py-2.5 rounded-lg font-medium text-sm bg-yellow-500 text-black transition-all duration-300 hover:bg-yellow-400"
           >
-            View My Work
+            🚀 View Projects
           </a>
           <a
             href="/resume.pdf"
@@ -80,7 +76,7 @@ function Hero() {
             rel="noreferrer"
             className="px-5 py-2.5 rounded-lg font-medium text-sm border border-yellow-500 text-yellow-500 bg-transparent transition-all duration-300 flex items-center gap-2 hover:bg-yellow-500 hover:text-black"
           >
-            <FaDownload size={13} /> Resume
+            <FaDownload size={13} /> Download Resume
           </a>
         </div>
 
@@ -112,7 +108,7 @@ function Hero() {
 
         {/* Code Block - hidden on mobile */}
         < div
-          className="hidden sm:block rounded-lg border overflow-hidden max-w-xs"
+          className="hidden sm:block rounded-lg border overflow-hidden"
           style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }
           }
         >
@@ -132,7 +128,7 @@ function Hero() {
           </div>
           <pre
             className="p-3 font-mono text-xs leading-relaxed overflow-hidden"
-            style={{ color: 'var(--accent)', height: '110px' }}
+            style={{ color: 'var(--accent)', height: '140px' }}
           >
             {displayedText}
             <span

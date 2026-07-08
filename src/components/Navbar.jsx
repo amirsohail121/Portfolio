@@ -4,10 +4,9 @@ import { FaHome, FaUser, FaGraduationCap, FaFileAlt, FaCode, FaFolderOpen, FaGit
 const navLinks = [
   { id: 'home', icon: FaHome, label: 'Home' },
   { id: 'about', icon: FaUser, label: 'About' },
-  { id: 'education', icon: FaGraduationCap, label: 'Education' },
-  { id: 'timeline', icon: FaFileAlt, label: 'Resume' },
   { id: 'skills', icon: FaCode, label: 'Skills' },
   { id: 'projects', icon: FaFolderOpen, label: 'Projects' },
+  { id: 'education', icon: FaGraduationCap, label: 'Education' },
   { id: 'githubstats', icon: FaGithub, label: 'GitHub' },
   { id: 'contact', icon: FaEnvelope, label: 'Contact' },
 ]

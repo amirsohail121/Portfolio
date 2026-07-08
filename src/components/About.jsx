@@ -2,10 +2,10 @@ import React from "react";
 
 function About() {
   const focus = [
-    "MERN Stack",
+    "React",
+    "Node.js",
     "AI Integration",
     "Socket.io",
-    "Cloud",
   ];
 
   return (
@@ -48,7 +48,7 @@ function About() {
           </div>
 
           {/* Card Content */}
-          <div className="p-8 md:p-10">
+          <div className="p-8 md:px-10">
             <div className="grid lg:grid-cols-[2fr_1fr] gap-10 items-center">
 
               {/* Left */}
@@ -59,22 +59,22 @@ function About() {
                 >
                   Hi, I'm Amir Sohail 👋
                 </h3>
-
+                <p className="font-mono text-xs mb-3 tracking-widest uppercase text-yellow-500">
+                  Full Stack MERN Developer | Final Year CSE Student
+                </p>
                 <p
                   className="leading-8 text-base"
                   style={{ color: "var(--text-muted)" }}
                 >
                   I'm a{" "}
                   <span className="font-semibold" style={{ color: "var(--text-heading)" }}>
-                    third-year Computer Science student
+                    final-year Computer Science student
                   </span>{" "}
                   and a{" "}
                   <span className="font-semibold" style={{ color: "var(--text-heading)" }}>
                     Full Stack MERN Developer
                   </span>
-                  . I enjoy building modern web applications that solve real-world
-                  problems through clean architecture, responsive interfaces, and
-                  scalable backend systems.
+                  . passionate about building scalable, user-friendly web applications with modern technologies.
                 </p>
 
                 <p
@@ -124,7 +124,7 @@ function About() {
                   </h4>
                   <ul className="space-y-3 text-sm" style={{ color: "var(--text-muted)" }}>
                     <li className="flex items-center gap-2">
-                      <span className="text-yellow-500">✓</span> Building real-world applications
+                      <span className="text-yellow-500">✓</span> Building production-ready applications
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="text-yellow-500">✓</span> Learning modern technologies
@@ -138,15 +138,7 @@ function About() {
                   </ul>
                 </div>
 
-                {/* Resume Button */}
-                <a
-                  href="/resume.pdf"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-sm bg-yellow-500 text-black transition-all duration-300 hover:bg-yellow-400"
-                >
-                  Download Resume ↓
-                </a>
+
 
               </div>
 
