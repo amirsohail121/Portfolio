@@ -5,7 +5,7 @@ import Hero from './components/Hero'
 import About from './components/About'
 import Education from './components/Education'
 // import Timeline from './components/Timeline'
-// import Skills from './components/Skills'
+import Skills from './components/Skills'
 // import Projects from './components/Projects'
 // import GithubStats from './components/GithubStats'
 // import Contact from './components/Contact'
@@ -22,10 +22,10 @@ function App() {
       <main className="flex-1  ml-0 sm:ml-20">
         <Hero />
         <About />
-        <Education />
+        <Skills />
         {/* <Timeline /> */}
-        {/* <Skills /> */}
         {/* <Projects /> */}
+        <Education />
         {/* <GithubStats /> */}
         {/* <Contact /> */}
         {/* <Footer /> */}
