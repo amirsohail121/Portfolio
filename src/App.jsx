@@ -7,7 +7,7 @@ import Education from './components/Education'
 // import Timeline from './components/Timeline'
 import Skills from './components/Skills'
 // import Projects from './components/Projects'
-// import GithubStats from './components/GithubStats'
+import GithubStats from './components/GithubStats'
 // import Contact from './components/Contact'
 // import Footer from './components/Footer'
 
@@ -26,7 +26,7 @@ function App() {
         {/* <Timeline /> */}
         {/* <Projects /> */}
         <Education />
-        {/* <GithubStats /> */}
+        <GithubStats />
         {/* <Contact /> */}
         {/* <Footer /> */}
       </main>

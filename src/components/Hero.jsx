@@ -108,13 +108,13 @@ function Hero() {
 
         {/* Code Block - hidden on mobile */}
         < div
-          className="hidden sm:block rounded-lg border overflow-hidden"
+          className="hidden sm:block rounded-3xl border overflow-hidden"
           style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }
           }
         >
           <div
             className="flex items-center gap-1.5 px-4 py-2 border-b"
-            style={{ borderColor: 'var(--border)' }}
+            style={{background: 'var(--bg-primary)', borderColor: 'var(--border)' }}
           >
             <span className="w-2 h-2 rounded-full bg-red-400/70" />
             <span className="w-2 h-2 rounded-full bg-yellow-400/70" />
