@@ -8,7 +8,7 @@ import Education from './components/Education'
 import Skills from './components/Skills'
 // import Projects from './components/Projects'
 import GithubStats from './components/GithubStats'
-// import Contact from './components/Contact'
+import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
         {/* <Projects /> */}
         <Education />
         <GithubStats />
-        {/* <Contact /> */}
+        <Contact />
         <Footer />
       </main>
 
