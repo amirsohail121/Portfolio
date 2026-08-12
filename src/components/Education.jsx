@@ -125,7 +125,7 @@ function Education() {
               {/* Right */}
               <div className="space-y-4">
 
-                {/* Academic Achievement */}
+                {/* Academic Achievement
                 <div
                   className="p-5 rounded-2xl border transition-all duration-300 hover:border-yellow-500"
                   style={{ background: 'rgba(255,255,255,0.02)', borderColor: 'var(--border)' }}
@@ -141,7 +141,7 @@ function Education() {
                   <p className="text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
                     Ranked among top students in 4th & 5th Semester
                   </p>
-                </div>
+                </div> */}
 
                 {/* Current Status */}
                 <div

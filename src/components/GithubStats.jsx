@@ -316,7 +316,7 @@ function GithubStats() {
   const [year, setYear] = useState(new Date().getFullYear())
   const [contribLoading, setContribLoading] = useState(false)
   const sectionRef = useRef(null)
-  const years = [2026, 2025, 2024]
+  const years = [2026, 2025]
 
   // Dark mode observer
   useEffect(() => {
