@@ -8,8 +8,21 @@ import {
   FaExternalLinkAlt,
   FaCalendarAlt
 } from 'react-icons/fa'
+import { projects } from '../data/projects'
 
 const username = 'amirsohail121'
+const fallbackProfile = {
+  name: 'Amir Sohail',
+  bio: 'Full Stack MERN Developer',
+  public_repos: projects.length,
+  followers: 0,
+  following: 0,
+}
+const fallbackRepos = [
+  { stargazers_count: 0, language: 'JavaScript' },
+  { stargazers_count: 0, language: 'JavaScript' },
+  { stargazers_count: 0, language: 'HTML' },
+]
 
 // Custom hook for counting animation
 function useCountUp(target, duration = 1500, start = false) {
@@ -119,7 +132,7 @@ function SkeletonBar() {
 function TerminalBar({ filename }) {
   return (
     <div
-      className="flex items-center gap-2 px-6 py-3 border-b"
+      className="flex items-center gap-2 px-4 sm:px-6 py-3 border-b min-w-0"
       style={{ background: 'var(--bg-primary)', borderColor: 'var(--border)' }}
     >
       <div className="flex gap-1.5">
@@ -192,8 +205,8 @@ function ContributionGraph({ data, darkMode }) {
   }
 
   return (
-    <div style={{ position: 'relative', overflow: 'visible' }}>
-      <div style={{ minWidth: '500px', position: 'relative', overflow: 'visible' }}>
+    <div className="max-w-full overflow-x-auto pb-2" style={{ position: 'relative', overflowY: 'visible' }}>
+      <div style={{ width: 'max-content', minWidth: '100%', position: 'relative', overflow: 'visible' }}>
         <div style={{ display: 'flex', gap: '2px', overflow: 'visible' }}>
           {weeks.map((week, wi) => (
             <div key={wi} style={{ display: 'flex', flexDirection: 'column', gap: '2px', overflow: 'visible' }}>
@@ -202,8 +215,8 @@ function ContributionGraph({ data, darkMode }) {
                   key={di}
                   style={{
                     position: 'relative',
-                    width: '12px',
-                    height: '12px',
+                    width: 'clamp(4px, 1.5vw, 12px)',
+                    height: 'clamp(4px, 1.5vw, 12px)',
                     borderRadius: '3px',
                     background: getColor(day.level),
                     border: `1px solid ${getBorderColor(day.level)}`,
@@ -267,15 +280,15 @@ function ContributionGraph({ data, darkMode }) {
           </div>
         )}
 
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '12px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2" style={{ marginTop: '12px' }}>
+          <div className="flex flex-wrap items-center gap-1">
             <span style={{ fontSize: '11px', fontFamily: 'monospace', color: 'var(--text-muted)' }}>Less</span>
             {[0, 1, 2, 3, 4].map(level => (
               <div
                 key={level}
                 style={{
-                  width: '12px',
-                  height: '12px',
+                  width: 'clamp(4px, 1.5vw, 12px)',
+                  height: 'clamp(4px, 1.5vw, 12px)',
                   borderRadius: '3px',
                   background: getColor(level),
                   border: `1px solid ${getBorderColor(level)}`,
@@ -295,7 +308,7 @@ function ContributionGraph({ data, darkMode }) {
             <span style={{ fontSize: '11px', fontFamily: 'monospace', color: 'var(--text-muted)' }}>More</span>
           </div>
 
-          <div style={{ fontSize: '11px', fontFamily: 'monospace', color: 'var(--text-muted)' }}>
+          <div className="font-mono text-[11px]" style={{ color: 'var(--text-muted)' }}>
             {data.contributions.filter(d => d.count > 0).length} active days
           </div>
         </div>
@@ -312,7 +325,7 @@ function GithubStats() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
   const [visible, setVisible] = useState(false)
-  const [darkMode, setDarkMode] = useState(!document.body.classList.contains('light'))
+  const [darkMode, setDarkMode] = useState(() => document.body.classList.contains('dark'))
   const [year, setYear] = useState(new Date().getFullYear())
   const [contribLoading, setContribLoading] = useState(false)
   const sectionRef = useRef(null)
@@ -321,7 +334,7 @@ function GithubStats() {
   // Dark mode observer
   useEffect(() => {
     const observer = new MutationObserver(() => {
-      setDarkMode(!document.body.classList.contains('light'))
+      setDarkMode(document.body.classList.contains('dark'))
     })
     observer.observe(document.body, { attributes: true, attributeFilter: ['class'] })
     return () => observer.disconnect()
@@ -343,15 +356,24 @@ function GithubStats() {
 
   // Fetch GitHub data
   useEffect(() => {
+    const fetchJson = async (url) => {
+      const response = await fetch(url)
+      const data = await response.json()
+      if (!response.ok) throw new Error(data.message || `GitHub request failed: ${response.status}`)
+      return data
+    }
+
     Promise.all([
-      fetch(`https://api.github.com/users/${username}`).then(r => r.json()),
-      fetch(`https://api.github.com/users/${username}/repos?per_page=100`).then(r => r.json()),
+      fetchJson(`https://api.github.com/users/${username}`),
+      fetchJson(`https://api.github.com/users/${username}/repos?per_page=100`),
     ]).then(([profileData, reposData]) => {
+      if (!profileData || !Array.isArray(reposData)) throw new Error('Invalid GitHub response')
       setProfile(profileData)
       setRepos(reposData)
       setLoading(false)
     }).catch(() => {
-      setError(true)
+      setProfile(fallbackProfile)
+      setRepos(fallbackRepos)
       setLoading(false)
     })
   }, [])
@@ -378,7 +400,7 @@ function GithubStats() {
   })
   const topLanguages = Object.entries(langCount)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 6)
+    .slice(0, 2)
   const totalLangCount = topLanguages.reduce((acc, [, count]) => acc + count, 0)
 
   if (error) {
@@ -460,18 +482,18 @@ function GithubStats() {
 
           {/* Contribution Graph Card */}
           <div
-            className="rounded-3xl border overflow-visible transition-all duration-300 hover:border-yellow-500/50 hover:shadow-2xl hover:shadow-yellow-500/5"
+            className="min-w-0 rounded-3xl border overflow-visible transition-all duration-300 hover:border-yellow-500/50 hover:shadow-2xl hover:shadow-yellow-500/5"
             style={{ background: 'var(--bg-card)', borderColor: 'var(--border)', overflow: 'visible' }}
           >
             <TerminalBar filename="contributions.js" />
-            <div className="p-6" style={{ overflow: 'visible' }}>
+            <div className="p-4 sm:p-6" style={{ overflow: 'visible' }}>
               {/* Header */}
               <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
                 <div>
                   <p className="text-xs font-mono uppercase tracking-widest opacity-60" style={{ color: 'var(--text-muted)' }}>
                     // contribution graph
                   </p>
-                  <p className="text-yellow-500 font-mono font-bold text-lg flex items-center gap-2">
+                  <p className="text-yellow-500 font-mono font-bold text-base sm:text-lg flex items-center gap-2">
                     <FaCalendarAlt className="text-sm" />
                     {totalContributions.toLocaleString()} contributions
                   </p>
@@ -483,7 +505,7 @@ function GithubStats() {
                     <button
                       key={y}
                       onClick={() => setYear(y)}
-                      className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all duration-300 ${year === y
+                      className={`px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs font-mono transition-all duration-300 ${year === y
                         ? 'bg-yellow-500 text-black font-bold shadow-lg shadow-yellow-500/30'
                         : 'hover:bg-yellow-500/10'
                         }`}
@@ -513,11 +535,11 @@ function GithubStats() {
 
           {/* Top Languages Card */}
           <div
-            className="rounded-3xl border overflow-hidden transition-all duration-300 hover:border-yellow-500/50 hover:shadow-2xl hover:shadow-yellow-500/5"
+            className="min-w-0 rounded-3xl border overflow-hidden transition-all duration-300 hover:border-yellow-500/50 hover:shadow-2xl hover:shadow-yellow-500/5"
             style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
           >
             <TerminalBar filename="languages.js" />
-            <div className="p-6">
+            <div className="p-4 sm:p-6">
               <p
                 className="text-xs font-mono uppercase tracking-widest opacity-60 mb-5"
                 style={{ color: 'var(--text-muted)' }}
@@ -525,7 +547,7 @@ function GithubStats() {
                 // most used languages
               </p>
 
-              <div className="space-y-4">
+              <div className="space-y-4 min-w-0">
                 {loading ? (
                   Array(5).fill(0).map((_, i) => <SkeletonBar key={i} />)
                 ) : (
@@ -560,12 +582,6 @@ function GithubStats() {
 
         </div>
 
-        {/* Footer note */}
-        <div className="mt-8 text-center">
-          <p className="text-xs font-mono opacity-40" style={{ color: 'var(--text-muted)' }}>
-            Data fetched from GitHub API • Updated in real-time
-          </p>
-        </div>
       </div>
     </section>
   )

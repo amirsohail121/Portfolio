@@ -4,8 +4,12 @@ function About() {
   const focus = [
     "React",
     "Node.js",
-    "AI Integration",
+    // "AI Integration",
     "Socket.io",
+  //   "Systems Design",
+  //   "Docker",
+  //  " AWS"
+   
   ];
 
   return (

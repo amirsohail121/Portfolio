@@ -79,7 +79,7 @@ function Footer() {
                 <FaGithub size={16} />
               </a>
               <a
-                href="https://linkedin.com/"
+                href="https://www.linkedin.com/in/amir-sohail-a5310b290/"
                 target="_blank"
                 rel="noreferrer"
                 className="w-9 h-9 rounded-lg border flex items-center justify-center"
@@ -106,7 +106,7 @@ function Footer() {
                 <FaLinkedin size={16} />
               </a>
               <a
-                href="mailto:youremail@gmail.com"
+                href="mailto:sohail2456@gmail.com"
                 className="w-9 h-9 rounded-lg border flex items-center justify-center"
                 style={{
                   borderColor: 'var(--border)',

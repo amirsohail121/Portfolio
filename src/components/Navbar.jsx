@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { FaHome, FaUser, FaGraduationCap, FaFileAlt, FaCode, FaFolderOpen, FaGithub, FaEnvelope } from 'react-icons/fa'
+import { FaHome, FaUser, FaGraduationCap, FaCode, FaFolderOpen, FaGithub, FaEnvelope } from 'react-icons/fa'
+import { BsThreeDotsVertical } from 'react-icons/bs'
 
 const navLinks = [
   { id: 'home', icon: FaHome, label: 'Home' },
@@ -14,7 +15,8 @@ const navLinks = [
 function Navbar() {
   const [activeLink, setActiveLink] = useState('home')
   const [tooltip, setTooltip] = useState(null)
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(() => document.body.classList.contains('dark'))
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const sections = document.querySelectorAll('section[id]')
@@ -32,19 +34,82 @@ function Navbar() {
 
   const scrollTo = (id) => {
     const el = document.getElementById(id)
-    if (el) el.scrollIntoView({ behavior: 'smooth' })
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' })
+      setMobileMenuOpen(false)
+    }
   }
 
   const toggleTheme = () => {
-    setDarkMode(!darkMode)
-    document.body.classList.toggle('dark')
+    const nextDarkMode = !darkMode
+    setDarkMode(nextDarkMode)
+    document.body.classList.toggle('dark', nextDarkMode)
   }
 
   return (
-    <aside
-      className="hidden sm:flex fixed left-0 top-0 h-full w-20 flex-col items-center py-6 z-50 border-r"
-      style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
-    >
+    <>
+      <div
+        className="sm:hidden fixed top-0 left-0 right-0 h-16 flex items-center justify-between px-5 z-50 border-b"
+        style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+      >
+        <button
+          onClick={() => scrollTo('home')}
+          className="font-bold text-sm tracking-widest"
+          style={{ color: 'var(--accent)' }}
+        >
+          amir.dev
+        </button>
+        <button
+          type="button"
+          aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="w-10 h-10 rounded-lg flex items-center justify-center border transition-colors"
+          style={{ borderColor: mobileMenuOpen ? 'var(--accent)' : 'var(--border)', color: 'var(--accent)' }}
+        >
+          <BsThreeDotsVertical size={20} />
+        </button>
+
+        {mobileMenuOpen && (
+          <div
+            className="absolute top-[calc(100%+0.5rem)] right-4 w-56 rounded-xl border p-2 shadow-xl"
+            style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+          >
+            {navLinks.map((link) => {
+              const Icon = link.icon
+              const isActive = activeLink === link.id
+              return (
+                <button
+                  key={link.id}
+                  onClick={() => scrollTo(link.id)}
+                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left text-sm font-mono transition-colors"
+                  style={{
+                    background: isActive ? 'var(--accent)' : 'transparent',
+                    color: isActive ? '#000000' : 'var(--text-body)',
+                  }}
+                >
+                  <Icon size={15} />
+                  {link.label}
+                </button>
+              )
+            })}
+            <div className="my-2 h-px" style={{ background: 'var(--border)' }} />
+            <button
+              onClick={toggleTheme}
+              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left text-sm font-mono"
+              style={{ color: 'var(--text-body)' }}
+            >
+              <span className="text-base">{darkMode ? '☾' : '☀'}</span>
+              {darkMode ? 'Light mode' : 'Dark mode'}
+            </button>
+          </div>
+        )}
+      </div>
+
+      <aside
+        className="hidden sm:flex fixed left-0 top-0 h-full w-20 flex-col items-center py-6 z-50 border-r"
+        style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }}
+      >
 
       {/* Logo */}
       <div
@@ -127,7 +192,8 @@ function Navbar() {
         )}
       </button>
 
-    </aside>
+      </aside>
+    </>
   )
 }
 

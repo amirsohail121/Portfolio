@@ -1,6 +1,5 @@
 import './App.css'
 import Navbar from './components/Navbar'
-import BottomNav from './components/BottomNav'
 import Hero from './components/Hero'
 import About from './components/About'
 import Education from './components/Education'
@@ -18,7 +17,7 @@ function App() {
       <Navbar />
 
       {/* Main Content */}
-      <main className="flex-1  ml-0 sm:ml-20">
+      <main className="flex-1 min-w-0 pt-16 sm:pt-0 sm:ml-20">
         <Hero />
         <About />
         <Skills />
@@ -28,9 +27,6 @@ function App() {
         <Contact />
         <Footer />
       </main>
-
-      {/* Bottom Nav — mobile only */}
-      <BottomNav />
 
     </div>
   )

@@ -151,7 +151,7 @@ function Contact() {
               </span>
             </div>
 
-            <form onSubmit={handleSubmit} className="p-8 space-y-5">
+            <form onSubmit={handleSubmit} className="contact-form p-8 space-y-5">
 
               {/* Name */}
               <div>
@@ -193,7 +193,7 @@ function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  placeholder="youremail@gmail.com"
+                  placeholder="sohail2456@gmail.com"
                   className="w-full px-4 py-3 rounded-xl border text-sm font-mono outline-none transition-all duration-300"
                   style={{
                     background: 'var(--bg-primary)',

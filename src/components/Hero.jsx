@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import heroImg from '../assets/heroImg.jpg'
+import { useState, useEffect } from 'react'
+import heroImg from '../assets/heroImg.png'
 import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from 'react-icons/fa'
 
 function Hero() {
@@ -23,11 +23,11 @@ function Hero() {
   }, [])
 
   return (
-    <section id="home" className="w-full min-h-screen flex flex-col sm:flex-row overflow-hidden">
+    <section id="home" className="w-full min-w-0 min-h-screen flex flex-col lg:flex-row overflow-hidden">
 
       {/* Left Side */}
       <div
-        className="flex flex-col justify-center px-6 sm:px-12 py-6 sm:py-0 w-full sm:w-1/2 order-2 sm:order-1 min-h-[50vh] sm:min-h-screen"
+        className="min-w-0 flex flex-col justify-center px-6 sm:px-12 py-6 lg:py-0 w-full lg:w-1/2 order-2 lg:order-1 min-h-[50vh] lg:min-h-screen"
         style={{ background: 'var(--bg-primary)' }}
       >
         {/* Greeting */}
@@ -37,7 +37,7 @@ function Hero() {
 
         {/* Name */}
         <h1
-          className="text-3xl sm:text-5xl font-extrabold mb-3 leading-tight"
+          className="max-w-full wrap-break-word text-3xl sm:text-5xl font-extrabold mb-3 leading-tight"
           style={{ color: 'var(--text-heading)' }}
         >
           Hi, I'm <span className="text-yellow-500">Amir Sohail</span>
@@ -71,7 +71,7 @@ function Hero() {
             🚀 View Projects
           </a>
           <a
-            href="/resume.pdf"
+            href="/amirsohail-resume.pdf"
             target="_blank"
             rel="noreferrer"
             className="px-5 py-2.5 rounded-lg font-medium text-sm border border-yellow-500 text-yellow-500 bg-transparent transition-all duration-300 flex items-center gap-2 hover:bg-yellow-500 hover:text-black"
@@ -91,7 +91,7 @@ function Hero() {
             <FaGithub size={16} />
           </a>
           <a
-            href="https://linkedin.com/"
+            href="https://www.linkedin.com/in/amir-sohail-a5310b290/"
             target="_blank"
             rel="noreferrer"
             className="w-9 h-9 rounded-lg border border-gray-600 text-gray-500 flex items-center justify-center transition-all duration-300 hover:bg-yellow-500 hover:text-black hover:border-yellow-500"
@@ -99,7 +99,7 @@ function Hero() {
             <FaLinkedin size={16} />
           </a >
           <a
-            href="mailto:youremail@gmail.com"
+            href="mailto:sohail2456@gmail.com"
             className="w-9 h-9 rounded-lg border border-gray-600 text-gray-500 flex items-center justify-center transition-all duration-300 hover:bg-yellow-500 hover:text-black hover:border-yellow-500"
           >
             <FaEnvelope size={16} />
@@ -108,7 +108,7 @@ function Hero() {
 
         {/* Code Block - hidden on mobile */}
         < div
-          className="hidden sm:block rounded-3xl border overflow-hidden"
+          className="hidden lg:block rounded-3xl border overflow-hidden"
           style={{ background: 'var(--bg-card)', borderColor: 'var(--border)' }
           }
         >
@@ -141,27 +141,14 @@ function Hero() {
       </div >
 
       {/* Right Side - Photo */}
-      < div className="relative w-full sm:w-1/2 h-80 sm:min-h-screen order-1 sm:order-2 flex-shrink-0" >
+      <div
+        className="relative w-full lg:w-1/2 h-80 lg:min-h-screen order-1 lg:order-2 shrink-0"
+        style={{ background: 'var(--bg-primary)' }}
+      >
         <img
           src={heroImg}
           alt="Amir Sohail"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-        />
-
-        {/* Left gradient — desktop only */}
-        <div
-          className="absolute inset-0 hidden sm:block"
-          style={{
-            background: 'linear-gradient(to right, var(--bg-primary) 0%, transparent 25%)',
-          }}
-        />
-
-        {/* Bottom gradient — mobile only */}
-        <div
-          className="absolute inset-0 sm:hidden"
-          style={{
-            background: 'linear-gradient(to top, var(--bg-primary) 10%, transparent 60%)',
-          }}
+          className="absolute inset-0 w-full h-full object-cover object-center scale-x-[-1]"
         />
 
         {/* Badge — desktop only */}
@@ -169,7 +156,7 @@ function Hero() {
           Available for Work ✓
         </div> */}
 
-      </div >
+      </div>
 
     </section >
   )
