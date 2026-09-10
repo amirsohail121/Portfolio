@@ -1,4 +1,5 @@
 import './App.css'
+import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -8,8 +9,9 @@ import Projects from './components/Projects'
 import GithubStats from './components/GithubStats'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import ProjectDetails from './components/ProjectDetails'
 
-function App() {
+function PortfolioHome() {
   return (
     <div className="flex min-h-screen " style={{ background: 'var(--bg-primary)' }}>
 
@@ -29,6 +31,17 @@ function App() {
       </main>
 
     </div>
+  )
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<PortfolioHome />} />
+      <Route path="/:section" element={<PortfolioHome />} />
+      <Route path="/projects/:projectId" element={<ProjectDetails />} />
+      <Route path="*" element={<PortfolioHome />} />
+    </Routes>
   )
 }
 

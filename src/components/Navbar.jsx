@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { FaHome, FaUser, FaGraduationCap, FaCode, FaFolderOpen, FaGithub, FaEnvelope } from 'react-icons/fa'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 
@@ -13,6 +14,8 @@ const navLinks = [
 ]
 
 function Navbar() {
+  const navigate = useNavigate()
+  const location = useLocation()
   const [activeLink, setActiveLink] = useState('home')
   const [tooltip, setTooltip] = useState(null)
   const [darkMode, setDarkMode] = useState(() => document.body.classList.contains('dark'))
@@ -33,12 +36,27 @@ function Navbar() {
   }, [])
 
   const scrollTo = (id) => {
-    const el = document.getElementById(id)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-      setMobileMenuOpen(false)
-    }
+    const path = id === 'home' ? '/' : `/${id}`
+    navigate(path)
+    setMobileMenuOpen(false)
+
+    window.setTimeout(() => {
+      const el = document.getElementById(id)
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+      else if (id === 'home') window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, 0)
   }
+
+  useEffect(() => {
+    const sectionId = location.pathname === '/' ? 'home' : location.pathname.slice(1)
+    if (sectionId === 'home') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
+
+    const el = document.getElementById(sectionId)
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }, [location.pathname])
 
   const toggleTheme = () => {
     const nextDarkMode = !darkMode

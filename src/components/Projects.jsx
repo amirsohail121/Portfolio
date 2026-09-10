@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { FaGithub, FaExternalLinkAlt, FaStar, FaArrowRight, FaExpand, FaTimes } from 'react-icons/fa'
 import { projects } from '../data/projects'
 
@@ -177,6 +178,13 @@ function ProjectCard({ project, index, total, onExpand, cardRef }) {
         </div>
 
         <div className="flex items-center gap-2 pt-3 border-t" style={{ borderColor: 'var(--border)' }}>
+          <Link
+            to={`/projects/${project.id}`}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-mono transition-all duration-300"
+            style={{ background: '#eab308', color: '#000' }}
+          >
+            Details
+          </Link>
           <a
             href={project.github}
             target="_blank"
@@ -365,6 +373,13 @@ function Projects() {
                   </div>
 
                   <div className="flex items-center gap-3">
+                    <Link
+                      to={`/projects/${featured.id}`}
+                      className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-mono transition-all duration-300"
+                      style={{ background: '#eab308', color: '#000' }}
+                    >
+                      Details
+                    </Link>
                     <a
                       href={featured.github}
                       target="_blank"
